@@ -3,44 +3,37 @@
 #include <windows.h>
 #include <conio.h>
 #include "./functions/functions.h"
+#include "./classes/frame.h"
+#include "./classes/ship.h"
 
 //■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■//
 
 int main(int argc, char const *argv[])
 {
-    //function to hide cursor
-    hideCursor();
-
     //game over flag
     bool gameOver = false;
 
     //initial coord variables
     int x=10, y=10;
 
-    //initial screen drawing
-    gotoxy(x, y);
-    printf("*");
+    //game frame
+    Frame* frame = new Frame(getWindowSize().first,getWindowSize().second);
+    frame->drawScreenFrame();
+
+    //initial ship instance
+    Ship* ship = new Ship(x, y, 2);
+    ship->create();
 
     //main loop for game
     while (!gameOver)
     {
-        //activate if a key is pressed
-        if (kbhit())
-        {
-            //input for key pressed by user
-            char key = getch();
+        //function to hide cursor
+        hideCursor();
 
-            //erase character in old position
-            gotoxy(x, y);
-            printf(" ");
-            
-            ctrlMovement(x, y, key);
+        ship->move();
 
-            //drawing in new position
-            gotoxy(x, y);
-            printf("*");
-        }
-        
+        frame->drawHearts();
+
         //sleep to avoid system overload
         Sleep(30);
     }
@@ -48,8 +41,8 @@ int main(int argc, char const *argv[])
     return 0;
 }
 
-/* COMMAND TO COMPILE FILE WITH PROPER FUNCTIONS FILE:
+/* COMMAND TO COMPILE FILE WITH PROPER CPP FILES FOR LINKER:
 
-    g++ main.cpp functions/functions.cpp -o main.exe 
+    g++ main.cpp functions/functions.cpp classes/ship.cpp classes/frame.cpp -o main.exe 
 
 */
