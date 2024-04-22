@@ -99,5 +99,31 @@
 
     };
 
+    //Display optional info
+    void Frame::drawInfo(int x, int y){
+
+        setColor(PURPLE);
+        gotoxy(getSizeScreenX()-110, 1);
+        printf("%c X: ", 175);
+
+        printf("     ");
+        gotoxy(getWindowSize().first-105, 1);
+
+        setColor(RED);
+        printf("%i", x);
+
+
+        setColor(PURPLE);
+        gotoxy(getSizeScreenX()-100, 1);
+        printf("%c Y: ", 175);
+
+        printf("     ");
+        gotoxy(getWindowSize().first-95, 1);
+
+        setColor(RED);
+        printf("%i", y);
+    };
+
+
 #endif
 

@@ -30,6 +30,9 @@
 
         //display current hearts
         void drawHearts(size_t currentHearts);
+
+        //display optional info
+        void drawInfo(int x, int y);
     };
     
 #endif

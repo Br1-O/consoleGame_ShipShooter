@@ -11,8 +11,8 @@ class Ship : public Entity
         int _y = 40;
         //size&skin
         int _skin = 1;
-        size_t width = 8;
-        size_t height = 4;
+        size_t _width = 8;
+        size_t _height = 4;
         //health&lives
         size_t _health = 10;
         size_t _hearts = 3;
@@ -34,13 +34,13 @@ class Ship : public Entity
             return _x;
         };
         int getY() const override{
-            return _x;
+            return _y;
         };
         size_t getWidth() const override{
-            return width;
+            return _width;
         }
         size_t getHeight() const override{
-            return height;
+            return _height;
         }
         size_t getHealth(){
             return _health;

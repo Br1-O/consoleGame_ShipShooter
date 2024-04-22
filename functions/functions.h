@@ -20,10 +20,7 @@
     //Set font color
     void setColor(int color);
 
-    //Set game icon
-    void setIcon();
-
-    //Get console size
+    //Get console size (return: .firts = X , .second = Y)
     std::pair<int, int> getWindowSize();
 
     //Move cursor to desired coord

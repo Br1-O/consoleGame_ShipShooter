@@ -8,6 +8,7 @@
     #include <cmath>
     #include <utility>
     #include <string>
+    #include <iostream>
 
     //definitions
     #define UP 72
@@ -65,22 +66,29 @@
     //control movement via key input
     void ctrlMovement(int* x, int* y, size_t sizeX, size_t sizeY, char key){
         //control flow for movement of cursor via keys w/ control for size element, to limit element into screen frame 
-        //(the +2, +3 are to consider frame value)
-        if ((key == 'a'|| key == LEFT) && (*x) > ceil(sizeX/2+2) )
-        {
-            (*x)--;
-        }
-        if ((key == 'd' || key == RIGHT) && ( getWindowSize().first - (*x)) > ceil(sizeX/2+2))
-        {
-            (*x)++;
-        }
-        if ((key == 'w' || key == UP) && (*y) > ceil(sizeY/2)+1)
-        {
-            (*y)--;
-        }
-        if ((key == 's' || key == DOWN) && ( getWindowSize().second - (*y)) > ceil(sizeY/2+3))
-        {
-            (*y)++;
+        //(the +X are to consider frame value & object size)
+        switch (key) {
+            case 'a':
+            case LEFT:
+                if ((*x) > ceil(sizeX/2)) // Adjusted condition to prevent going beyond frame
+                    (*x)--;  // Move left
+                break;
+            case 'd':
+            case RIGHT:
+                if (( getWindowSize().first - (*x)) > ceil(sizeX/2+5)) // Adjusted condition for right movement
+                    (*x)++;  // Move right
+                break;
+            case 'w':
+            case UP:
+                if ((*y) > (ceil(sizeY/2)+1)) // Adjusted condition to prevent going beyond frame
+                    (*y)--;  // Move up
+                break;
+            case 's':
+            case DOWN:
+                if (( getWindowSize().second - (*y)) > ceil(sizeY/2+3)) // Adjusted condition for down movement
+                    (*y)++;  // Move down
+            default:
+                break;
         }
     }
 

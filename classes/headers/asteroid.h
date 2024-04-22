@@ -3,18 +3,20 @@
 
 #include <iostream>
 #include <stdio.h>
+#include <stdlib.h>
 #include <windows.h>
 #include <conio.h>
 #include "../../functions/functions.h"
 #include "./entity.h"
+#include "./ship.h"
 
 class Asteroid : public Entity
 {
 private:
-    int _x;
-    int _y;
-    size_t width;
-    size_t height;
+    int _x = 0;
+    int _y = 0;
+    size_t _width = 1;
+    size_t _height = 1;
 
 public:
 
@@ -23,6 +25,9 @@ public:
 
     //constructor w/ member initializer list
     Asteroid(int x, int y);
+
+    //constructor w/ member initializer list
+    Asteroid(int x, int y, size_t width, size_t height);
 
     //destructor
     ~Asteroid();
@@ -35,10 +40,10 @@ public:
         return _x;
     };
     size_t getWidth() const override{
-        return width;
+        return _width;
     }
     size_t getHeight() const override{
-        return height;
+        return _height;
     }
 
     //handle the asteroids display
@@ -49,6 +54,11 @@ public:
     virtual void erase() const override;
     //moves asteroid
     virtual void move() override;
+
+    //handle asteroid behavior
+
+    //collision
+    void impact(Ship* ship);
 
 };
 

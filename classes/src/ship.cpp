@@ -12,6 +12,10 @@
 
 //definitions
 #include "../headers/colors.h"
+#define UP 72
+#define LEFT 75
+#define RIGHT 77
+#define DOWN 80
 
 //generic constructor
 Ship::Ship(){};
@@ -57,30 +61,28 @@ void Ship::erase() const{
 
 //move ship
 void Ship::move() {
-        //activate if a key is pressed
-        if (kbhit())
-        {
-            //input for key pressed by user
-            char key = getch();
+         // Activate if a key is pressed
+    if (_kbhit()) {
+        // Input for key pressed by user
+        char key = _getch();
 
-            //erase ship in old position
-            erase();
-            
-            ctrlMovement(&_x, &_y, getWidth(), getHeight(), key);
+        // Erase ship in old position
+        erase();
 
-            if (key == 'p')
-            {
-                _skin == 2 ? _skin = 1 : _skin = 2;
-            }
+        //control movement via key input
+        ctrlMovement(&(_x), &(_y), getWidth(), getHeight(), key);
 
-            if (key == 'k')
-            {
-                explode();
-            }
-            
-            //drawing ship in new position
-            create();
+        if(key == 'p'){
+            _skin == 1 ? _skin = 2 : _skin = 1;
         }
+        if (key == 'k')
+        {
+            explode();
+        }
+        
+        // Drawing ship in new position
+        create();
+    }
 };
 
 //show explosion
