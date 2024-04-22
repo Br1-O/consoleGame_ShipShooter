@@ -6,6 +6,7 @@
     private:
         int _sizeScreenX = 120;
         int _sizeScreenY = 30;
+        int _health = 5;
         int _hearts = 3;
 
     public:
@@ -22,14 +23,20 @@
         int getSizeScreenY(){
             return _sizeScreenY;
         }
+        int getHealth(){
+            return _health;
+        }
         int getHearts(){
             return _hearts;
         }
         
-        //function to draw screen limits
+        //draw screen limits
         void drawScreenFrame();
 
-        //function to display current hearts
+        //display current health
+        void drawHealth();
+
+        //display current hearts
         void drawHearts();
     };
     

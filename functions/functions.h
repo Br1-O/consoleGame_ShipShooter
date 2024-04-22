@@ -6,20 +6,27 @@
     #include <stdio.h>
     #include <windows.h>
     #include <utility>
+    #include <string>
 
     //definition of cursor handle
     HANDLE getHandle();
 
-    //function to hide cursor
+    //hide cursor
     void hideCursor();
 
-    //function to get console size
+    //Set console title
+    void setTitle(std::string title);
+
+    //Set font color
+    void setColor(int color);
+
+    //Get console size
     std::pair<int, int> getWindowSize();
 
-    //function to move cursor to desired coord
+    //Move cursor to desired coord
     void gotoxy(int x, int y);
 
-    //function to control movement via key input
+    //Control movement via key input
     void ctrlMovement(int* x, int* y, size_t sizeX, size_t sizeY, char key);
 
 #endif  

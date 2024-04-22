@@ -4,9 +4,12 @@
     //includes
     #include <stdio.h>
     #include <windows.h>
-    #include "../functions/functions.h"
-    #include "../classes/frame.h"
+    #include "../../functions/functions.h"
+    #include "../headers/frame.h"
     #include <iostream>
+
+    //definitions
+    #include "../headers/colors.h"
 
     //constructor
     Frame::Frame(int sizeScreenX, int sizeScreenY): 
@@ -16,8 +19,11 @@
     //destructor
     Frame::~Frame(){};
 
-    //function to draw screen limits
+    //Draw screen limits
     void Frame::drawScreenFrame(){
+
+        setColor(PURPLE);
+
         for (size_t x = 2; x < getSizeScreenX(); x++)
         {
             //top screen line
@@ -51,13 +57,33 @@
         gotoxy(getSizeScreenX()-1, getSizeScreenY()-1); printf("%c", 188);
     };
 
-    //function to display current hearts
+    //Display current health
+    void Frame::drawHealth(){
+
+        setColor(PURPLE);
+
+        gotoxy(getSizeScreenX()-50, 1);
+
+        printf("%c Health: ", 175);
+
+        setColor(RED);
+        for (size_t i = 0; i < getHealth(); i++)
+        {
+            printf(" %c", 254);
+        }
+
+    };
+
+    //Display current hearts
     void Frame::drawHearts(){
+
+        setColor(PURPLE);
 
         gotoxy(getSizeScreenX()-20, 1);
 
-        printf("%c Salud: ", 254);
+        printf("%c Lives: ", 175);
 
+        setColor(RED);
         for (size_t i = 0; i < getHearts(); i++)
         {
             printf(" %c", 206);

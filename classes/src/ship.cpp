@@ -1,12 +1,15 @@
 #if !defined(SHIP_CPP)
 #define SHIP_CPP
 
+//includes
 #include <stdio.h>
 #include <windows.h>
 #include <conio.h>
-#include "../functions/functions.h"
-#include "../classes/ship.h"
-#include "ship.h"
+#include "../../functions/functions.h"
+#include "../headers/ship.h"
+
+//definitions
+#include "../headers/colors.h"
 
 //generic constructor
 Ship::Ship(){};
@@ -21,7 +24,9 @@ Ship::~Ship(){};
 //methods to handle the ship display in screen
 
 //function to show ship into screen
-void Ship::create(){
+void Ship::create() const{
+
+    setColor(GREEN);
 
     if (_skin == 1)
     {
@@ -40,14 +45,14 @@ void Ship::create(){
 
 };
 
-void Ship::erase(){
+void Ship::erase() const{
     gotoxy(_x, _y); printf(" ");
     gotoxy(_x-1, _y+1); printf("   ");
     gotoxy(_x-4, _y+2); printf("        ");
     gotoxy(_x-1, _y+3); printf("   ");
 };
 
-void Ship::move(){
+void Ship::move() {
         //activate if a key is pressed
         if (kbhit())
         {
@@ -57,8 +62,13 @@ void Ship::move(){
             //erase ship in old position
             erase();
             
-            ctrlMovement(&_x, &_y, getSizeX(), getSizeY(), key);
+            ctrlMovement(&_x, &_y, getWidth(), getHeight(), key);
 
+            if (key == 'p')
+            {
+                _skin == 2 ? _skin = 1 : _skin = 2;
+            }
+            
             //drawing ship in new position
             create();
         }

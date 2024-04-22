@@ -3,13 +3,17 @@
 #include <windows.h>
 #include <conio.h>
 #include "./functions/functions.h"
-#include "./classes/frame.h"
-#include "./classes/ship.h"
+#include "./classes/headers/frame.h"
+#include "./classes/headers/ship.h"
 
 //■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■//
 
 int main(int argc, char const *argv[])
 {
+
+    //game title
+    setTitle("Battle Ships v1.0");
+
     //game over flag
     bool gameOver = false;
 
@@ -32,6 +36,7 @@ int main(int argc, char const *argv[])
 
         ship->move();
 
+        frame->drawHealth();
         frame->drawHearts();
 
         //sleep to avoid system overload
@@ -43,6 +48,6 @@ int main(int argc, char const *argv[])
 
 /* COMMAND TO COMPILE FILE WITH PROPER CPP FILES FOR LINKER:
 
-    g++ main.cpp functions/functions.cpp classes/ship.cpp classes/frame.cpp -o main.exe 
+    g++ main.cpp functions/functions.cpp classes/src/ship.cpp classes/src/frame.cpp -o main.exe 
 
 */

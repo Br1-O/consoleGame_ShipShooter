@@ -7,12 +7,13 @@
     #include <windows.h>
     #include <cmath>
     #include <utility>
+    #include <string>
 
     //definitions
-    #define ARRIBA 72
-    #define IZQUIERDA 75
-    #define DERECHA 77
-    #define ABAJO 80
+    #define UP 72
+    #define LEFT 75
+    #define RIGHT 77
+    #define DOWN 80
 
     //Handle definition to manipulate cursor
     HANDLE getHandle(){
@@ -21,7 +22,7 @@
         return hCon;
     }
 
-    //function to hide cursor
+    //hide cursor
     void hideCursor(){
 
         //set visibility of cursor to false
@@ -32,14 +33,24 @@
         SetConsoleCursorInfo(getHandle(), &cci);
     };
 
-    //function to get size of screen (returns X value, Y value)
+    //set console title
+    void setTitle(std::string title){
+        SetConsoleTitleA(title.c_str());
+    };
+
+    //Set font color
+    void setColor(int color){
+        SetConsoleTextAttribute(getHandle(), color);
+    };
+
+    //get size of screen (returns X value, Y value)
     std::pair<int, int> getWindowSize() {
         CONSOLE_SCREEN_BUFFER_INFO csbi;
         GetConsoleScreenBufferInfo(getHandle(), &csbi);
         return std::make_pair(csbi.srWindow.Right - csbi.srWindow.Left + 1, csbi.srWindow.Bottom - csbi.srWindow.Top + 1);
     }
 
-    //function to move cursor to desired coord
+    //move cursor to desired coord
     void gotoxy(int x, int y){
 
         //assignation of coordinates for cursor into COORD struct of windows
@@ -51,23 +62,23 @@
         SetConsoleCursorPosition(getHandle(), dwPos);
     }
 
-    //function to control movement via key input
+    //control movement via key input
     void ctrlMovement(int* x, int* y, size_t sizeX, size_t sizeY, char key){
         //control flow for movement of cursor via keys w/ control for size element, to limit element into screen frame 
         //(the +2, +3 are to consider frame value)
-        if ((key == 'a'|| key == IZQUIERDA) && (*x) > ceil(sizeX/2+2) )
+        if ((key == 'a'|| key == LEFT) && (*x) > ceil(sizeX/2+2) )
         {
             (*x)--;
         }
-        if ((key == 'd' || key == DERECHA) && ( getWindowSize().first - (*x)) > ceil(sizeX/2+2))
+        if ((key == 'd' || key == RIGHT) && ( getWindowSize().first - (*x)) > ceil(sizeX/2+2))
         {
             (*x)++;
         }
-        if ((key == 'w' || key == ARRIBA) && (*y) > ceil(sizeY/2)+1)
+        if ((key == 'w' || key == UP) && (*y) > ceil(sizeY/2)+1)
         {
             (*y)--;
         }
-        if ((key == 's' || key == ABAJO) && ( getWindowSize().second - (*y)) > ceil(sizeY/2+3))
+        if ((key == 's' || key == DOWN) && ( getWindowSize().second - (*y)) > ceil(sizeY/2+3))
         {
             (*y)++;
         }
