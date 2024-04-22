@@ -9,16 +9,22 @@ class Ship : public Entity
         //coordinates
         int _x = 40;
         int _y = 40;
+        //size&skin
         int _skin = 1;
         size_t width = 8;
         size_t height = 4;
+        //health&lives
+        size_t _health = 10;
+        size_t _hearts = 3;
+        //game over flag
+        bool* _gameOver;
 
     public:
         //generic constructor
         Ship();
 
         //constructor w/ member initializer list
-        Ship(int x, int y, int skin);
+        Ship(int x, int y, int skin, bool* gameOver);
 
         //destructor
         ~Ship();
@@ -36,17 +42,26 @@ class Ship : public Entity
         size_t getHeight() const override{
             return height;
         }
+        size_t getHealth(){
+            return _health;
+        }
+        size_t getHearts(){
+            return _hearts;
+        }
 
-        //methods to handle the ship display in screen
+        //handle the ship display in screen
 
-        //function to show ship into screen
+        //show ship
         void create() const override;
 
-        //function to show ship into screen
+        //erase ship
         void erase() const override;
 
-        //function to show ship into screen
+        //move ship
         void move() override;
+
+        //show explosion
+        void explode();
 };
 
 #endif

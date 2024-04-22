@@ -20,6 +20,9 @@
     //Set font color
     void setColor(int color);
 
+    //Set game icon
+    void setIcon();
+
     //Get console size
     std::pair<int, int> getWindowSize();
 

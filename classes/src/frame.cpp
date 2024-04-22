@@ -58,24 +58,28 @@
     };
 
     //Display current health
-    void Frame::drawHealth(){
+    void Frame::drawHealth(size_t currentHealth){
 
         setColor(PURPLE);
 
-        gotoxy(getSizeScreenX()-50, 1);
+        gotoxy(getSizeScreenX()-45, 1);
 
         printf("%c Health: ", 175);
+        
+        //clear previous values
+        printf("          ", 175);
+        gotoxy(getSizeScreenX()-35, 1);
 
         setColor(RED);
-        for (size_t i = 0; i < getHealth(); i++)
+        for (size_t i = 0; i < currentHealth; i++)
         {
-            printf(" %c", 254);
+            printf("%c", 219);
         }
 
     };
 
     //Display current hearts
-    void Frame::drawHearts(){
+    void Frame::drawHearts(size_t currentHearts){
 
         setColor(PURPLE);
 
@@ -83,8 +87,12 @@
 
         printf("%c Lives: ", 175);
 
+        //clear previous values
+        printf("        ", 175);
+        gotoxy(getSizeScreenX()-11, 1);
+
         setColor(RED);
-        for (size_t i = 0; i < getHearts(); i++)
+        for (size_t i = 0; i < currentHearts; i++)
         {
             printf(" %c", 206);
         }

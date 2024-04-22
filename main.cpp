@@ -10,7 +10,6 @@
 
 int main(int argc, char const *argv[])
 {
-
     //game title
     setTitle("Battle Ships v1.0");
 
@@ -25,29 +24,32 @@ int main(int argc, char const *argv[])
     frame->drawScreenFrame();
 
     //initial ship instance
-    Ship* ship = new Ship(x, y, 2);
+    Ship* ship = new Ship(x, y, 2, &gameOver);
     ship->create();
 
     //main loop for game
     while (!gameOver)
     {
-        //function to hide cursor
+        //hide cursor
         hideCursor();
 
+        //check ship movement
         ship->move();
 
-        frame->drawHealth();
-        frame->drawHearts();
+        //draw frame data
+        frame->drawHealth(ship->getHealth());
+        frame->drawHearts(ship->getHearts());
 
         //sleep to avoid system overload
         Sleep(30);
     }
+
     
     return 0;
 }
 
 /* COMMAND TO COMPILE FILE WITH PROPER CPP FILES FOR LINKER:
 
-    g++ main.cpp functions/functions.cpp classes/src/ship.cpp classes/src/frame.cpp -o main.exe 
+    g++ main.cpp functions/functions.cpp classes/src/ship.cpp classes/src/frame.cpp classes/src/asteroid.cpp -o main.exe 
 
 */

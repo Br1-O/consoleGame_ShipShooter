@@ -6,8 +6,6 @@
     private:
         int _sizeScreenX = 120;
         int _sizeScreenY = 30;
-        int _health = 5;
-        int _hearts = 3;
 
     public:
         //constructor
@@ -23,21 +21,15 @@
         int getSizeScreenY(){
             return _sizeScreenY;
         }
-        int getHealth(){
-            return _health;
-        }
-        int getHearts(){
-            return _hearts;
-        }
         
         //draw screen limits
         void drawScreenFrame();
 
         //display current health
-        void drawHealth();
+        void drawHealth(size_t currentHealth);
 
         //display current hearts
-        void drawHearts();
+        void drawHearts(size_t currentHearts);
     };
     
 #endif
