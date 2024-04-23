@@ -7,8 +7,10 @@
     #include <windows.h>
     #include <cmath>
     #include <utility>
-    #include <string>
     #include <iostream>
+    #include <string>
+    #include <mmsystem.h> // Windows Multimedia API header
+    #pragma comment(lib, "winmm.lib") // Link with winmm.lib
 
     //definitions
     #define UP 72
@@ -91,6 +93,20 @@
                 break;
         }
     }
+
+    //include sound
+    void addSound(const std::string& str) {
+    // Convert narrow string to wide string
+    int len = MultiByteToWideChar(CP_ACP, 0, str.c_str(), -1, NULL, 0);
+    wchar_t* wideStr = new wchar_t[len];
+    MultiByteToWideChar(CP_ACP, 0, str.c_str(), -1, wideStr, len);
+
+    // Play sound file
+    PlaySoundW(wideStr, NULL, SND_FILENAME | SND_ASYNC); // Use PlaySoundW
+
+    delete[] wideStr; // Free the allocated memory
+    }
+
 
 #endif
 

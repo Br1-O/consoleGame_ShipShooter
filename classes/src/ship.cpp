@@ -12,6 +12,7 @@
 #include "../headers/frame.h"
 #include "../headers/projectile.h"
 #include <list>
+#include <string>
 
 //definitions
 #include "../headers/colors.h"
@@ -79,6 +80,8 @@ void Ship::move() {
         //shoot projectile
         if(key == 'y'){
             shoot();
+            //sound effect
+            addSound("assets/sounds/laser-gun-shot.wav");
         }
         //select skin for ship
         if(key == 'p'){
@@ -99,6 +102,8 @@ void Ship::move() {
 void Ship::explode(){
     //erase ship
     erase();
+    //sound effect
+    addSound("assets/sounds/ship-hit.wav");
     //draw explosion frame 1
     gotoxy(_x,_y);   printf("   **   ");
     gotoxy(_x,_y+1); printf("  ****  ");

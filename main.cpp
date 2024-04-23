@@ -9,12 +9,8 @@
 #include "./classes/headers/asteroid.h"
 #include "./classes/headers/projectile.h"
 #include <list>
-
-
-//list to group asteroids
-std::list <Asteroid*> AST;
-//iterator of asteroids list
-std::list <Asteroid*>::iterator it;
+#include <string>
+#include <iostream>
 
 //spawn asteroid instances
 void spawnAst(std::list <Asteroid*>* AST){
@@ -40,8 +36,15 @@ int main(int argc, char const *argv[])
     int x=55, y=20;
     //spawner flag
     int spawnTimer = 5;
+    //diff flag
+    int diff = 0;
     //point variable
     int points = 0;
+
+    //list to group asteroids
+    std::list <Asteroid*> AST;
+    //iterator of asteroids list
+    std::list <Asteroid*>::iterator it;
 
     //initial ship instance
     Ship* ship = new Ship(x, y, 2, &gameOver);
@@ -55,10 +58,11 @@ int main(int argc, char const *argv[])
         
         //spawn of asteroids
         spawnTimer++;
-        if (spawnTimer%50==0)
+        if (spawnTimer%10==0)
         {
             //spawn new asteroid
             spawnAst(&AST);
+            diff+=1;
             points+=50;
         }
         
@@ -90,6 +94,9 @@ int main(int argc, char const *argv[])
                     //erase asteroid from list
                     it = AST.erase(it);
 
+                    //sound effect
+                    addSound("assets/sounds/asteroid-hit.wav");
+
                     points+=500;
                 }
             }
@@ -116,7 +123,7 @@ int main(int argc, char const *argv[])
         ship->move();
 
         //draw frame data
-        frame->drawInfo(points, spawnTimer);
+        frame->drawInfo(points, diff);
         frame->drawHealth(ship->getHealth());
         frame->drawHearts(ship->getHearts());
 
@@ -130,6 +137,5 @@ int main(int argc, char const *argv[])
 
 /* COMMAND TO COMPILE FILE WITH PROPER CPP FILES FOR LINKER:
 
-    g++ main.cpp functions/functions.cpp classes/src/ship.cpp classes/src/frame.cpp classes/src/asteroid.cpp classes/src/projectile.cpp -o main.exe 
-
+    g++ main.cpp functions/functions.cpp classes/src/ship.cpp classes/src/frame.cpp classes/src/asteroid.cpp classes/src/projectile.cpp -o main.exe -lwinmm
 */

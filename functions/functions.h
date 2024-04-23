@@ -7,6 +7,8 @@
     #include <windows.h>
     #include <utility>
     #include <string>
+    #include <iostream>
+
 
     //definition of cursor handle
     HANDLE getHandle();
@@ -28,6 +30,9 @@
 
     //Control movement via key input
     void ctrlMovement(int* x, int* y, size_t sizeX, size_t sizeY, char key);
+
+    //include sound
+    void addSound(const std::string& str);
 
 #endif  
 
