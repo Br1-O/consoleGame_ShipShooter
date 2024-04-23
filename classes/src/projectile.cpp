@@ -58,13 +58,4 @@ void Projectile::move() {
         return (_y < 5) ? true : false;
     };
 
-//on hit
-// void Projectile::onHit(Asteroid* ast) {
-//     //compare coordinates
-//     if((_x = ast->getX()) && (_y >= ast->getY())){
-//         ast->erase();
-//         erase();
-//     }
-// };
-
 #endif

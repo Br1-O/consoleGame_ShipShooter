@@ -8,7 +8,6 @@
 #include <windows.h>
 #include <conio.h>
 #include "./entity.h"
-// #include "./asteroid.h"
 
 class Projectile : public Entity
 {
@@ -63,9 +62,6 @@ public:
 
     //check if reaches top limit
     bool isOut();
-
-    //on hit
-    // void onHit(Asteroid* ast);
 
 };
 

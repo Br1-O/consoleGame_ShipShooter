@@ -40,6 +40,8 @@ int main(int argc, char const *argv[])
     int x=55, y=20;
     //spawner flag
     int spawnTimer = 5;
+    //point variable
+    int points = 0;
 
     //initial ship instance
     Ship* ship = new Ship(x, y, 2, &gameOver);
@@ -53,10 +55,11 @@ int main(int argc, char const *argv[])
         
         //spawn of asteroids
         spawnTimer++;
-        if (spawnTimer%20==0)
+        if (spawnTimer%50==0)
         {
             //spawn new asteroid
             spawnAst(&AST);
+            points+=50;
         }
         
         //Drawing asteroids
@@ -64,6 +67,32 @@ int main(int argc, char const *argv[])
         {
             (*(it))->move();
             (*(it))->impact(ship);
+
+            for (ship->it = ship->shots.begin(); ship->it != ship->shots.end(); ship->it++)
+            {
+
+                //check if projectile hits an asteroid
+                //check collision
+                 if (((*ship->it)->getX() == (*it)->getX()) && 
+                    ((*ship->it)->getY() == (*it)->getY() || (*ship->it)->getY() == (*it)->getY() + 1))
+                {
+                    //erase projectile from screen
+                    (*(ship->it))->erase();
+                    //free heap memory from projectile instance
+                    delete (*(ship->it));
+                    //erase projectile from list
+                    ship->it = ship->shots.erase(ship->it);
+
+                    //erase asteroid from screen
+                    (*it)->erase();
+                    //free heap memory from asteroid instance
+                    delete ((*it));
+                    //erase asteroid from list
+                    it = AST.erase(it);
+
+                    points+=500;
+                }
+            }
         };
 
         //Drawing projectiles shot by ship
@@ -87,7 +116,7 @@ int main(int argc, char const *argv[])
         ship->move();
 
         //draw frame data
-        frame->drawInfo(ship->getX(), ship->getY());
+        frame->drawInfo(points, spawnTimer);
         frame->drawHealth(ship->getHealth());
         frame->drawHearts(ship->getHearts());
 

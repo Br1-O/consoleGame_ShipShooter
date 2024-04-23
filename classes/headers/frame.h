@@ -32,7 +32,7 @@
         void drawHearts(size_t currentHearts);
 
         //display optional info
-        void drawInfo(int x, int y);
+        void drawInfo(int points, int difficulty);
     };
     
 #endif

@@ -100,28 +100,28 @@
     };
 
     //Display optional info
-    void Frame::drawInfo(int x, int y){
+    void Frame::drawInfo(int points, int difficulty){
 
         setColor(PURPLE);
-        gotoxy(getSizeScreenX()-110, 1);
-        printf("%c X: ", 175);
+        gotoxy(getSizeScreenX()-116, 1);
+        printf("%c POINTS: ", 175);
 
         printf("     ");
         gotoxy(getWindowSize().first-105, 1);
 
         setColor(RED);
-        printf("%i", x);
+        printf("%i", points);
 
 
         setColor(PURPLE);
-        gotoxy(getSizeScreenX()-100, 1);
-        printf("%c Y: ", 175);
+        gotoxy(getSizeScreenX()-90, 1);
+        printf("%c DIFF: ", 175);
 
         printf("     ");
-        gotoxy(getWindowSize().first-95, 1);
+        gotoxy(getWindowSize().first-80, 1);
 
         setColor(RED);
-        printf("%i", y);
+        printf("%i", difficulty);
     };
 
 

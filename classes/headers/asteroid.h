@@ -38,7 +38,7 @@ public:
         return _x;
     };
     int getY() const override{
-        return _x;
+        return _y;
     };
     size_t getWidth() const override{
         return _width;
