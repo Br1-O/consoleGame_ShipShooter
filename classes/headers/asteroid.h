@@ -1,6 +1,7 @@
 #if !defined(ASTEROID_H)
 #define ASTEROID_H
 
+#include <cstddef>
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -56,7 +57,7 @@ public:
     virtual void move() override;
 
     //handle asteroid behavior
-
+    
     //collision
     void impact(Ship* ship);
 

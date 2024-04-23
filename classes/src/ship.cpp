@@ -2,6 +2,7 @@
 #define SHIP_CPP
 
 //includes
+#include <cstddef>
 #include <iostream>
 #include <stdio.h>
 #include <windows.h>
@@ -9,6 +10,8 @@
 #include "../../functions/functions.h"
 #include "../headers/ship.h"
 #include "../headers/frame.h"
+#include "../headers/projectile.h"
+#include <list>
 
 //definitions
 #include "../headers/colors.h"
@@ -61,7 +64,8 @@ void Ship::erase() const{
 
 //move ship
 void Ship::move() {
-         // Activate if a key is pressed
+    
+    // Activate if a key is pressed
     if (_kbhit()) {
         // Input for key pressed by user
         char key = _getch();
@@ -72,9 +76,15 @@ void Ship::move() {
         //control movement via key input
         ctrlMovement(&(_x), &(_y), getWidth(), getHeight(), key);
 
+        //shoot projectile
+        if(key == 'y'){
+            shoot();
+        }
+        //select skin for ship
         if(key == 'p'){
             _skin == 1 ? _skin = 2 : _skin = 1;
         }
+        //explode ship
         if (key == 'k')
         {
             explode();
@@ -124,6 +134,11 @@ void Ship::explode(){
 
     //drawing ship
     create();
+}
+
+void Ship::shoot(){
+    //push new instance of projectile to list
+    shots.push_back(new Projectile(getX()+4, getY()-1));
 }
 
 #endif

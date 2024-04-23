@@ -1,7 +1,14 @@
 #if !defined(SHIP_H)
 #define SHIP_H
 
+#include <cstddef>
+#include <stdio.h>
+#include <stdlib.h>
+#include <windows.h>
+#include <conio.h>
 #include "./entity.h"
+#include "../headers/projectile.h"
+#include <list>
 
 class Ship : public Entity
 {
@@ -20,6 +27,12 @@ class Ship : public Entity
         bool* _gameOver;
 
     public:
+
+        //list to group projectiles
+        std::list <Projectile*> shots;
+        //iterator to iterate through all projectiles
+        std::list <Projectile*>::iterator it;
+        
         //generic constructor
         Ship();
 
@@ -62,6 +75,9 @@ class Ship : public Entity
 
         //show explosion
         void explode();
+
+        //shoot projectile
+        void shoot();
 };
 
 #endif

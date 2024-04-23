@@ -2,6 +2,11 @@
 #define ASTEROID_CPP
 
 //includes
+#include <stdio.h>
+#include <stdlib.h>
+#include <windows.h>
+#include <conio.h>
+#include <cstddef>
 #include "../headers/asteroid.h"
 #include "../headers/ship.h"
 #include "../../functions/functions.h"
